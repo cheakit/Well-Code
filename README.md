@@ -1,3 +1,10 @@
+Resources
+Pattern: 
+-[https://medium.com/@flutterdynasty/design-patterns-in-flutter-25191278149c
+](url)
+-[https://blog.stackademic.com/solid-principles-in-flutter-crafting-robust-apps-0e1d1bcefeca](url)
+
+
 # Writing Clean Code in Flutter
 
 ## Introduction
