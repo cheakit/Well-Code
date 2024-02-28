@@ -4,77 +4,108 @@
 
 In Flutter development, writing clean and maintainable code is essential for the long-term success of a project. Clean code not only makes the codebase easier to understand but also facilitates collaboration among team members and reduces the likelihood of bugs. This document outlines best practices and guidelines for writing clean code in Flutter.
 
-## 1. Consistent Formatting
 
-### 1.1. Code Style
-
-- Adhere to the Dart Style Guide for consistent code formatting.
-- Utilize tools like `dartfmt` to automatically format code.
-
-### 1.2. File Structure
+### 1. File Structure
 
 - Organize files logically within the project directory.
 - Use folders to group related files (e.g., screens, models, services).
 
-## 2. Meaningful Names
+### 2. Meaningful Names
 
-### 2.1. Variable Names
+#### 2.1. Variable Names
 
 - Use descriptive names that convey the purpose of the variable.
 - Avoid abbreviations and single-letter variable names.
 
-### 2.2. Class Names
+```dart
+// Bad: Using non-descriptive variable names
+var a = 10;
 
-- Class names should be nouns and written in UpperCamelCase.
-- Use descriptive names that reflect the class's responsibility.
+// Good: Using descriptive variable names
+var numberOfItems = 10;
+```
 
-## 3. Modularization
+#### 2.2. Class Names
 
-### 3.1. Single Responsibility Principle (SRP)
+Class names should be nouns and written in UpperCamelCase.
+Use descriptive names that reflect the class's responsibility.
 
-- Each class or function should have a single responsibility.
-- Refactor large classes or functions into smaller, focused ones.
+```dart
+// Bad: Non-descriptive class name
+class XYZ {}
 
-### 3.2. Separation of Concerns (SoC)
+// Good: Descriptive class name
+class UserRepository {}
+```
 
-- Separate UI logic from business logic.
-- Utilize widgets for UI components and separate business logic into separate classes.
+#### 2.3. Searchable Names
 
-## 4. Documentation
+Use searchable names instead of calling it inside the function
 
-### 4.1. Inline Comments
+```dart
+//! BAD 
 
-- Use comments to explain complex algorithms or non-obvious code.
-- Keep comments concise and up-to-date.
+Future.delayed(const Duration(minutes: 30), () { 
+  debugPrint('some logic here');
+}); 
 
-### 4.2. Documentation Comments
+//* GOOD 
 
-- Document public APIs using Dartdoc comments.
-- Describe the purpose, parameters, and return values of functions and methods.
+const MINUTES_DURATION = 30;
 
-## 5. Error Handling
+Future.delayed(const Duration(minutes: MINUTES_DURATION), () { 
+  debugPrint('some logic');
+}); 
+```
 
-### 5.1. Use Exceptions
+### 3. API
 
-- Throw exceptions to indicate errors or exceptional conditions.
-- Handle exceptions gracefully using `try-catch` blocks.
+Use Future.wait to make concurrent API calls
+By using Future.wait, you can initiate multiple async tasks at the same time. Thereby reducing the overall execution time
 
-### 5.2. Null Safety
+```dart
+Future callMultipleApis() async { 
+  await getUserInfo(); 
+  await getLocations();
+} 
 
-- Embrace null safety to prevent null reference errors.
-- Utilize null-aware operators (`?.`, `??`) to handle null values.
+//* GOOD 
 
-## 6. Testing
+Future callMultipleApis() async { 
+  await Future.wait([
+    getUserInfo(), 
+    getLocations(), 
+  ]);
+}
+```
 
-### 6.1. Unit Tests
+### 4. Don't make duplicate code
 
-- Write unit tests to verify the behavior of individual functions and methods.
-- Utilize frameworks like `flutter_test` for writing unit tests.
+Avoid duplicate code as much as possible. Duplications can complicate maintenance and updates, leading to inconsistencies. Instead, create a solid abstraction that can handle multiple scenarios with a single function or module. However, ensure that the abstraction is well-designed and follows the SOLID principles.
 
-### 6.2. Widget Tests
+```dart
+//! BAD
 
-- Write widget tests to verify the UI behavior of widgets.
-- Use `flutter_test` and `flutter_driver` for widget testing.
+Widget _buildAvatarStudent() {
+  return Image.asset('assets/images/student.png');
+}
+
+Widget _buildAvatarTeacher() {
+  return Image.asset('assets/images/teacher.png');
+}
+
+//! GOOD
+
+Widget _buildAvatar(Person person) {
+  String image = 'assets/images/placeholder.png';
+  if (person is Student) {
+    image = 'assets/images/student.png';
+  } else if (person is Teacher) {
+    image = 'assets/iamges/teacher.png';
+  }
+  return Image.asset(image);
+}
+```
 
 ## Conclusion
 
