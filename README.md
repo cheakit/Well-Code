@@ -22,15 +22,15 @@ In Flutter development, writing clean and maintainable code is essential for the
   * **Model**
 
     - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងច្អឹង)
-```
-class Product{
-  String name;
-  double price;
-  String quantity;
-
-  Product({required this.name,required this.price,required this.quantity});
-}
-```
+    ```
+    class Product{
+      String name;
+      double price;
+      String quantity;
+    
+      Product({required this.name,required this.price,required this.quantity});
+    }
+    ```
 
   * **Screens/Views**
 
@@ -40,70 +40,70 @@ class Product{
 
     - The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
 
-```
-// ORIGINAL:
-class ProfileScreen extends StatefulWidget {
-  @override
-  _ProfileScreenState createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  String inputText = '';
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      onChanged: (value) {
-        setState(() {
-          inputText = value; // Update the inputText whenever the user types (This is where the state change)
-        });
-      },
-      decoration: InputDecoration(
-        hintText: 'Type something...',
-      ),
-    );
-  }
-}
-
-// IMPROVED:
-class UserController extends GetxController {
-  final inputText = Rx<String>('');
-
-  // Update input text
-  void updateInputText(String value) {
-    inputText.value = value;
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(UserController());
-    return TextField(
-      onChanged: controller.updateInputText,
-      decoration: InputDecoration(
-        hintText: 'Type something...',
-      ),
-    );
-  }
-}
-
-```
+    ```
+    // ORIGINAL:
+    class ProfileScreen extends StatefulWidget {
+      @override
+      _ProfileScreenState createState() => _ProfileScreenState();
+    }
+    
+    class _ProfileScreenState extends State<ProfileScreen> {
+      String inputText = '';
+    
+      @override
+      Widget build(BuildContext context) {
+        return TextField(
+          onChanged: (value) {
+            setState(() {
+              inputText = value; // Update the inputText whenever the user types (This is where the state change)
+            });
+          },
+          decoration: InputDecoration(
+            hintText: 'Type something...',
+          ),
+        );
+      }
+    }
+    
+    // IMPROVED:
+    class UserController extends GetxController {
+      final inputText = Rx<String>('');
+    
+      // Update input text
+      void updateInputText(String value) {
+        inputText.value = value;
+      }
+    }
+    
+    class ProfileScreen extends StatelessWidget {
+      ProfileScreen({Key key}) : super(key: key);
+    
+      @override
+      Widget build(BuildContext context) {
+        final controller = Get.put(UserController());
+        return TextField(
+          onChanged: controller.updateInputText,
+          decoration: InputDecoration(
+            hintText: 'Type something...',
+          ),
+        );
+      }
+    }
+    
+    ```
 
   * **Service**
 
     - Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
-```
-class UserService{
-
-  User getProfile() async {
-    // Makes http calls here with Dio or GraphQL etc..
-  }
-
-}
-```
+    ```
+    class UserService{
+    
+      User getProfile() async {
+        // Makes http calls here with Dio or GraphQL etc..
+      }
+    
+    }
+    ```
 
 ```dart
 // BAD:
