@@ -313,11 +313,17 @@ int calculateSquare(int num) {
 
 ---
 
-### 2. Design Patterns (S.O.L.I.D Principle)
+### 2. Design Patterns 
+
+---
+
+### 3. Software Design Principles 
+
+**S.O.L.I.D Principle**
 
 ![My Image](image/SOLID.jpg)
 
-#### 2.1 S — Single Responsibility Principle (SRP)
+#### 3.1 S — Single Responsibility Principle (SRP)
 
 The idea behind the SRP is that every class, module, or function in a program should have one responsibility/purpose in a program. As a commonly used definition, "every class should have only one reason to change".
 
@@ -427,7 +433,7 @@ class UserProfile extends StatelessWidget {
 }
 ```
 
-#### 2.2 O — Open/Closed Principle (OCP)
+#### 3.2 O — Open/Closed Principle (OCP)
 
 The open-closed principle states that software entities should be open for extension, but closed for modification.
 This implies that such entities – classes, functions, and so on – should be created in a way that their core functionalities can be extended to other entities without altering the initial entity's source code.
@@ -476,7 +482,7 @@ class ShapePainter {
 }
 ```
 
-#### 2.3 L — Liskov Substitution Principle (LSP)
+#### 3.3 L — Liskov Substitution Principle (LSP)
 
 According to Barbara Liskov and Jeannette Wing, the Liskov substitution principle states that:
 
@@ -522,7 +528,7 @@ class Penguin extends Bird {
 }
 ```
 
-#### 2.4 I — Interface Segregation Principle (ISP)
+#### 3.4 I — Interface Segregation Principle (ISP)
 
 The interface segregation principle states that the interface of a program should be split in a way that the user/client would only have access to the necessary methods related to their needs.
 
@@ -597,7 +603,7 @@ class Jane implements EnglishTeacher {
 
 Now the Teacher class now has only one method. You can extend from the teacher class without getting other unecessary **methods**.
 
-#### 2.5 D — Dependency Inversion Principle (DIP)
+#### 3.5 D — Dependency Inversion Principle (DIP)
 
 The dependency inversion principle states:
 
@@ -687,10 +693,6 @@ In summary, adopting SOLID principles in Flutter not only results in a more main
 
 ### Conclusion
 While the SOLID principles might sound theoretical initially, applying them can lead to tangible benefits in your Flutter projects. As you craft more apps, these principles can be your trusty companions, guiding you towards cleaner, more efficient, and joyous coding adventures!
-
----
-
-### 3. Software Design Principles
 
 ---
 
