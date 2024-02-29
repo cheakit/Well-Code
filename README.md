@@ -177,7 +177,7 @@ The idea behind the SRP is that every class, module, or function in a program sh
 Consider the example below:
 
 ```dart
-// DON'T:
+// DO:
 class Student {
   void registerStudent() {
     // some logic
@@ -418,10 +418,14 @@ class Jane implements Teacher {
 
 From the code above, you can tell that Jane is an English teacher who has no business with the other subjects. But these other methods are extended by default with the Teacher interface.
 
-Break it down:
+Do not confuse the Liskov substitution principle and the interface segregation principle.The Liskov Substitution Principle emphasizes that a subclass should inherit from a base class only if it genuinely needs the base class's methods.
+
+In contrast, the Interface Segregation Principle advises against creating interfaces with excessive methods, as some may be irrelevant for specific users when extended.
+
+Now let's fix the code in the last example and break it down.
 
 ```dart
-// DON'T
+// DO
 abstract class EnglishTeacher {
   void english();
 }
@@ -443,6 +447,8 @@ class Jane implements EnglishTeacher {
   }
 }
 ```
+
+Now the Teacher class now has only one method. You can extend from the teacher class with getting other unecessary **methods**.
 
 ---
 
