@@ -177,7 +177,7 @@ The idea behind the SRP is that every class, module, or function in a program sh
 Consider the example below:
 
 ```dart
-// Avoid:
+// DON'T:
 class Student {
   void registerStudent() {
     // some logic
@@ -203,7 +203,7 @@ Imagine a new developer joining a team with this sort of logic with a codebase o
 Now let's fix this
 
 ```dart
-// Good:
+// DO:
 class StudentRegister {
   void registerStudent() {
     // some logic
@@ -219,6 +219,29 @@ class StudentResult{
 class StudentEmails{
   void sendEmail() {
     // some logic
+  }
+}
+```
+
+Also imagine a widget handling UI rendering, data retrieval, and business logic. Sounds messy, right? SRP advocates for splitting responsibilities. For instance, rather than a monolithic widget, use dedicated widgets for UI, providers, blocs or GetX for state management, and repositories for data operations.
+
+```dart
+// DON'T:
+class UserProfile extends StatelessWidget {
+  final User user;
+  //... constructor and other methods
+
+  Future<UserData> fetchUserData(int id) async {
+    // Fetch logic here (asynchronous)
+    // ...
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Fetching user data (Not a UI responsibility!)
+    final data = fetchUserData(user.id);
+
+    return Text(data.name);
   }
 }
 ```
