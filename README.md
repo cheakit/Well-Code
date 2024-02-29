@@ -289,7 +289,7 @@ class MyCustomButton extends StatelessWidget {
 
 ### 2. Design Patterns (S.O.L.I.D Principle)
 
-![My Image](../image/SOLID.jpg)
+![My Image](image/SOLID.jpg)
 
 #### 2.1 S — Single Responsibility Principle (SRP)
 
