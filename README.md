@@ -704,6 +704,8 @@ Adhering to clean code principles in Flutter development leads to a more maintai
 
 ## References
 
+-[https://flutterdesignpatterns.com/pattern/singleton](url)
+
 -[https://medium.com/@flutterdynasty/design-patterns-in-flutter-25191278149c
 ](url)
 
