@@ -21,7 +21,7 @@ In Flutter development, writing clean and maintainable code is essential for the
 
 * **Model**
 
-- Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងច្អឹង)
+  - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងច្អឹង)
 ```
 class Product{
   String name;
@@ -34,11 +34,11 @@ class Product{
 
 * **Screens/Views**
 
-- Views contains the various pages or screens of your application. The Views can also contain sub-folders that contains related views together.
+  - Views contains the various pages or screens of your application. The Views can also contain sub-folders that contains related views together.
 
 * **Controller**
 
-The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
+  - The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
 
 ```
 // ORIGINAL:
@@ -94,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
 
 * **Service**
 
-- Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
+  - Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
 ```
 class UserService{
 
