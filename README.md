@@ -619,9 +619,9 @@ class LightSwitch {
 }
 ```
 
-#### Why SOLID in Flutter?
+### Why SOLID in Flutter?
 
-##### Robust Architecture:
+#### Robust Architecture:
 Structuring your Flutter codebase around SOLID principles, which include Single Responsibility Principle (SRP), Open/Closed Principle (OCP), Liskov Substitution Principle (LSP), Interface Segregation Principle (ISP), and Dependency Inversion Principle (DIP), leads to a more robust architecture.
 
 - **Single Responsibility Principle (SRP):**
@@ -639,7 +639,7 @@ Structuring your Flutter codebase around SOLID principles, which include Single 
 - **Dependency Inversion Principle (DIP):**
   - High-level modules are not dependent on low-level modules; both depend on abstractions. This inversion of control enhances flexibility and maintainability.
 
-##### Flexibility:
+#### Flexibility:
 Adhering to SOLID principles brings increased flexibility to your Flutter project.
 
 - **Easier Changes:**
@@ -648,7 +648,7 @@ Adhering to SOLID principles brings increased flexibility to your Flutter projec
 - **Smoother Feature Additions:**
   - Adding new features is a smoother process, as the codebase is designed to accommodate changes without disrupting existing functionality.
 
-##### Testability:
+#### Testability:
 SOLID principles significantly enhance the testability of your Flutter application.
 
 - **Decoupled Components:**
