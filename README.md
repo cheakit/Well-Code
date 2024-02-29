@@ -168,9 +168,119 @@ Widget _buildAvatar(Person person) {
 
 ---
 
-### 2. Design Patterns
+### 2. Design Patterns (S.O.L.I.D Principle)
 
 #### 2.1 S — Single Responsibility Principle (SRP)
+
+The idea behind the SRP is that every class, module, or function in a program should have one responsibility/purpose in a program. As a commonly used definition, "every class should have only one reason to change".
+
+Consider the example below:
+
+```dart
+// DON'T:
+class Student {
+  void registerStudent() {
+    // some logic
+  }
+
+  void calculateStudentResults() {
+    // some logic
+  }
+
+  void sendEmail() {
+    // some logic
+  }
+}
+```
+
+The class above violates the single responsibility principle. Why?
+This Student class has three responsibilities – registering students, calculating their results, and sending out emails to students.
+
+The code above will work perfectly but will lead to some challenges. We cannot make this code reusable for other classes or objects. The class has a whole lot of logic interconnected that we would have a hard time fixing errors.
+
+Imagine a new developer joining a team with this sort of logic with a codebase of about two thousand lines of code all congested into one class.
+
+Now let's fix this
+
+```dart
+// DO:
+class StudentRegister {
+  void registerStudent() {
+    // some logic
+  }
+}
+
+class StudentResult{
+  void calculateStudentResults() {
+    // some logic
+  }
+}
+
+class StudentEmails{
+  void sendEmail() {
+    // some logic
+  }
+}
+```
+
+Also imagine a widget handling UI rendering, data retrieval, and business logic. Sounds messy, right? SRP advocates for splitting responsibilities. For instance, rather than a monolithic widget, use dedicated widgets for UI, providers, blocs or GetX for state management, and repositories for data operations.
+
+```dart
+// DON'T:
+class UserProfile extends StatelessWidget {
+  final User user;
+  //... constructor and other methods
+
+  Future<UserData> fetchUserData() async {
+    // Fetch logic here (asynchronous)
+    // ...
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Fetching user data (Not a UI responsibility!)
+    user = fetchUserData(user.id);
+
+    return Text(data.name);
+  }
+}
+```
+
+Instead, separate responsibilities:
+
+```dart
+class UserController extend GetxController {
+
+Final user= Rxn<User>(null);
+
+@override
+  void onInit() {
+    fetchUserData();
+  }
+
+
+  // Handles data fetching logic
+  Future<UserData> fetchUserData(int id) async {
+    // Fetch logic here (asynchronous) from service
+    // ...
+	user.value = result;
+  }
+}
+
+class UserProfile extends StatelessWidget {
+
+  UserProfile({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
+    return Text(controller.user.value.name)
+    );
+  }
+}
+```
+
+#### 2.2 O — Open/Closed Principle (OCP)
 
 ---
 
@@ -190,3 +300,5 @@ Adhering to clean code principles in Flutter development leads to a more maintai
 ](url)
 
 -[https://blog.stackademic.com/solid-principles-in-flutter-crafting-robust-apps-0e1d1bcefeca](url)
+
+-[https://www.freecodecamp.org/news/solid-principles-single-responsibility-principle-explained/](url)
