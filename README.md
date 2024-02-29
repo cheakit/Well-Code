@@ -289,6 +289,7 @@ What if you now need to draw squares? Instead of altering the widget, design it 
 
 Instead of:
 ```dart
+// DON'T
 class ShapePainter {
   final String shapeType;
 
@@ -305,6 +306,7 @@ class ShapePainter {
 Opt for:
 
 ```dart
+// DO
 abstract class Shape {
   void draw();
 }
