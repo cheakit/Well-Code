@@ -193,6 +193,36 @@ class Student {
 }
 ```
 
+The class above violates the single responsibility principle. Why?
+This Student class has three responsibilities – registering students, calculating their results, and sending out emails to students.
+
+The code above will work perfectly but will lead to some challenges. We cannot make this code reusable for other classes or objects. The class has a whole lot of logic interconnected that we would have a hard time fixing errors.
+
+Imagine a new developer joining a team with this sort of logic with a codebase of about two thousand lines of code all congested into one class.
+
+Now let's fix this
+
+```dart
+// Avoid:
+class StudentRegister {
+  void registerStudent() {
+    // some logic
+  }
+}
+
+class StudentResult{
+  void calculateStudentResults() {
+    // some logic
+  }
+}
+
+class StudentEmails{
+  void sendEmail() {
+    // some logic
+  }
+}
+```
+
 ---
 
 ### 3. Software Design Principles
