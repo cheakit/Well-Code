@@ -329,6 +329,16 @@ class ShapePainter {
 }
 ```
 
+#### 2.2 L — Liskov Substitution Principle (LSP)
+
+According to Barbara Liskov and Jeannette Wing, the Liskov substitution principle states that:
+
+Don't worry if you find that confusing, it will all make sense soon. Let's simplify this principle below:
+
+The Liskov substitution principle simply implies that when an instance of a class is passed/extended to another class, the inheriting class should have a use case for all the properties and behavior of the inherited class.
+
+Imagine having a base Bird class and a derived Penguin class. If the Bird class has a fly method, it wouldn't fit the Penguin. LSP suggests that derived classes should perfectly fit the behaviors of their base classes. Here, we might need a rethinking of our class design.
+
 ---
 
 ### 3. Software Design Principles
