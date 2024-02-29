@@ -575,11 +575,11 @@ Now the Teacher class now has only one method. You can extend from the teacher c
 
 The dependency inversion principle states:
 
-*High-level modules should not import anything from low-level modules. Both should depend on abstractions*
+	*High-level modules should not import anything from low-level modules. Both should depend on abstractions*
 
 And,
 
-*Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.*
+	*Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.*
 
 ---
 
