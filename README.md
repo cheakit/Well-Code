@@ -17,7 +17,46 @@ In Flutter development, writing clean and maintainable code is essential for the
 #### 1.1 File Structure
 
 - Organize files logically within the project directory.
-- Use folders to group related files (e.g., screens, models, services).
+- Use folders to group related files (e.g., screens, models, services ..etc).
+
+```dart
+// Bad:
+project_directory/
+│
+├── lib/
+│   ├── home_screen.dart
+│   ├── profile_screen.dart
+│   ├── settings_screen.dart
+│   ├── user_model.dart
+│   ├── product_model.dart
+│   ├── order_model.dart
+│   ├── authentication_service.dart
+│   ├── database_service.dart
+│   └── analytics_service.dart
+│
+└── main.dart
+
+// Good:
+project_directory/
+│
+├── lib/
+│   ├── screens/
+│   │   ├── home_screen.dart
+│   │   ├── profile_screen.dart
+│   │   └── settings_screen.dart
+│   │
+│   ├── models/
+│   │   ├── user_model.dart
+│   │   ├── product_model.dart
+│   │   └── order_model.dart
+│   │
+│   └── services/
+│       ├── authentication_service.dart
+│       ├── database_service.dart
+│       └── analytics_service.dart
+│
+└── main.dart
+```
 
 #### 1.2 Meaningful Names
 
