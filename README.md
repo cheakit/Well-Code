@@ -22,7 +22,7 @@ In Flutter development, writing clean and maintainable code is essential for the
   * **Model**
 
     - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងឆ្អឹង)
-    ```
+    ```dart
     class Product{
       String name;
       double price;
@@ -40,7 +40,7 @@ In Flutter development, writing clean and maintainable code is essential for the
 
     - The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
 
-    ```
+    ```dart
     // ORIGINAL:
     class ProfileScreen extends StatefulWidget {
       @override
@@ -95,7 +95,7 @@ In Flutter development, writing clean and maintainable code is essential for the
   * **Service**
 
     - Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
-    ```
+    ```dart
     class UserService{
     
       User getProfile() async {
