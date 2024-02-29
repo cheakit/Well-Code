@@ -575,11 +575,47 @@ Now the Teacher class now has only one method. You can extend from the teacher c
 
 The dependency inversion principle states:
 
-	*High-level modules should not import anything from low-level modules. Both should depend on abstractions*
+	High-level modules should not import anything from low-level modules. Both should depend on abstractions
 
 And,
 
-	*Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.*
+	Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
+
+ *Example*
+
+ Rather than:
+
+ ```dart
+class LightSwitch {
+  final Bulb bulb;
+
+  void operate() {
+    bulb.toggle();
+  }
+}
+```
+
+Go for:
+
+```dart
+abstract class Switchable {
+  void toggle();
+}
+
+class Bulb implements Switchable {
+  void toggle() {
+    // Toggle bulb
+  }
+}
+
+class LightSwitch {
+  final Switchable device;
+
+  void operate() {
+    device.toggle();
+  }
+}
+```
 
 ---
 
