@@ -17,22 +17,113 @@ In Flutter development, writing clean and maintainable code is essential for the
 #### 1.1 File Structure
 
 - Organize files logically within the project directory.
-- Use folders to group related files (e.g., screens, models, services ..etc).
+- Use folders to group related files (e.g., models, screens/views, controller, services ..etc).
+
+  * **Model**
+
+    - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងឆ្អឹង)
+    ```dart
+    class Product{
+      String name;
+      double price;
+      String quantity;
+    
+      Product({required this.name,required this.price,required this.quantity});
+    }
+    ```
+
+  * **Screens/Views**
+
+    - Views contains the various pages or screens of your application. The Views can also contain sub-folders that contains related views together.
+
+  * **Controller**
+
+    - The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
+
+    ```dart
+    // ORIGINAL:
+    class ProfileScreen extends StatefulWidget {
+      @override
+      _ProfileScreenState createState() => _ProfileScreenState();
+    }
+    
+    class _ProfileScreenState extends State<ProfileScreen> {
+      String inputText = '';
+    
+      @override
+      Widget build(BuildContext context) {
+        return TextField(
+          onChanged: (value) {
+            setState(() {
+              inputText = value; // Update the inputText whenever the user types (This is where the state change)
+            });
+          },
+          decoration: InputDecoration(
+            hintText: 'Type something...',
+          ),
+        );
+      }
+    }
+    
+    // IMPROVED:
+    class UserController extends GetxController {
+      final inputText = Rx<String>('');
+    
+      // Update input text
+      void updateInputText(String value) {
+        inputText.value = value;
+      }
+    }
+    
+    class ProfileScreen extends StatelessWidget {
+      ProfileScreen({Key key}) : super(key: key);
+    
+      @override
+      Widget build(BuildContext context) {
+        final controller = Get.put(UserController());
+        return TextField(
+          onChanged: controller.updateInputText,
+          decoration: InputDecoration(
+            hintText: 'Type something...',
+          ),
+        );
+      }
+    }
+    
+    ```
+
+  * **Service**
+
+    - Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
+    ```dart
+    class UserService{
+    
+      User getProfile() async {
+        // Makes http calls here with Dio or GraphQL etc..
+      }
+    
+    }
+    ```
+
+* **Structure**
 
 ```dart
 // BAD:
 project_directory/
 │
 ├── lib/
-│   ├── home_screen.dart
+│   ├── login_screen.dart
+│   ├── product_screen.dart
 │   ├── profile_screen.dart
-│   ├── settings_screen.dart
-│   ├── user_model.dart
+│   ├── authentication_model.dart
 │   ├── product_model.dart
-│   ├── order_model.dart
+│   ├── user_model.dart
+│   ├── authentication_controller.dart
+│   ├── product_controller.dart
+│   ├── profile_controller.dart
 │   ├── authentication_service.dart
-│   ├── database_service.dart
-│   └── analytics_service.dart
+│   ├── product_service.dart
+│   └── profile_service.dart
 │
 └── main.dart
 
@@ -41,19 +132,24 @@ project_directory/
 │
 ├── lib/
 │   ├── screens/
-│   │   ├── home_screen.dart
-│   │   ├── profile_screen.dart
-│   │   └── settings_screen.dart
+│   │   ├── login_screen.dart
+│   │   ├── product_screen.dart
+│   │   └── profile_Screen.dart
 │   │
 │   ├── models/
-│   │   ├── user_model.dart
+│   │   ├── authentication_model.dart
 │   │   ├── product_model.dart
-│   │   └── order_model.dart
+│   │   └── user_model.dart
+│   │
+│   ├── controllers/
+│   │   ├── product_controller.dart
+│   │   ├── profile_controller.dart
+│   │   └── authentication_controller.dart
 │   │
 │   └── services/
 │       ├── authentication_service.dart
-│       ├── database_service.dart
-│       └── analytics_service.dart
+│       ├── product_service.dart
+│       └── profile_service.dart
 │
 └── main.dart
 ```
@@ -98,7 +194,6 @@ Future.delayed(const Duration(minutes: 30), () {
 }); 
 
 // GOOD:
-
 const MINUTES_DURATION = 30;
 
 Future.delayed(const Duration(minutes: MINUTES_DURATION), () { 
@@ -145,24 +240,48 @@ Future callMultipleApis() async {
 Avoid duplicate code as much as possible. Duplications can complicate maintenance and updates, leading to inconsistencies. Instead, create a solid abstraction that can handle multiple scenarios with a single function or module. However, ensure that the abstraction is well-designed and follows the SOLID principles.
 
 ```dart
-// BAD:
-Widget _buildAvatarStudent() {
-  return Image.asset('assets/images/student.png');
+// BAD: Avoid repeating the same code.
+void main() {
+  print("Hello, Alice!");
+  print("Hello, Bob!");
 }
 
-Widget _buildAvatarTeacher() {
-  return Image.asset('assets/images/teacher.png');
+// GOOD: Create a function to handle repetitive tasks.
+String greet(String name) {
+  return "Hello, $name!";
 }
 
-// GOOD:
-Widget _buildAvatar(Person person) {
-  String image = 'assets/images/placeholder.png';
-  if (person is Student) {
-    image = 'assets/images/student.png';
-  } else if (person is Teacher) {
-    image = 'assets/iamges/teacher.png';
+void main() {
+  print(greet("Alice"));
+  print(greet("Bob"));
+}
+```
+
+#### 1.5 Creating Custom Widgets
+
+By creating custom widgets, you avoid duplicating code across your application. Once you've defined a custom widget, you can reuse it multiple times in different parts of your app. On top of that, you ensure that similar components look and behave the same way across your app.
+
+```dart
+// ORIGINAL: A single widget instance. If you need to modify anything within the button, you'll have to update each instance individually.
+ElevatedButton(
+      onPressed: (){},
+      child: Text('Press Me'),
+    );
+
+// IMPROVED: Customizable button widget allowing easy modification of text and behavior in a single file.
+class MyCustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  CustomButton({required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+    );
   }
-  return Image.asset(image);
 }
 ```
 
