@@ -257,6 +257,34 @@ void main() {
 }
 ```
 
+#### 1.5 Creating Custom Widgets
+
+By creating custom widgets, you avoid duplicating code across your application. Once you've defined a custom widget, you can reuse it multiple times in different parts of your app. On top of that, you ensure that similar components look and behave the same way across your app.
+
+```dart
+// ORIGINAL: A single widget instance. If you need to modify anything within the button, you'll have to update each instance individually.
+ElevatedButton(
+      onPressed: (){},
+      child: Text('Press Me'),
+    );
+
+// IMPROVED: Customizable button widget allowing easy modification of text and behavior in a single file.
+class MyCustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  CustomButton({required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+    );
+  }
+}
+```
+
 ---
 
 ### 2. Design Patterns (S.O.L.I.D Principle)
