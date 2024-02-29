@@ -285,6 +285,48 @@ class UserProfile extends StatelessWidget {
 The open-closed principle states that software entities should be open for extension, but closed for modification.
 This implies that such entities – classes, functions, and so on – should be created in a way that their core functionalities can be extended to other entities without altering the initial entity's source code.
 
+What if you now need to draw squares? Instead of altering the widget, design it in a way that allows adding new shapes without changing the existing code. Maybe introduce a base Shape class and extend it for various forms.
+
+Instead of:
+```dart
+class ShapePainter {
+  final String shapeType;
+
+  draw() {
+    if (shapeType == 'circle') {
+      // Draw circle
+    } else if (shapeType == 'square') {
+      // Draw square
+    }
+  }
+}
+```
+
+Opt for:
+
+```dart
+abstract class Shape {
+  void draw();
+}
+
+class Circle implements Shape {
+  void draw() {
+    // Draw circle
+  }
+}
+
+class Square implements Shape {
+  void draw() {
+    // Draw square
+  }
+}
+
+class ShapePainter {
+  final Shape shape;
+  void draw() => shape.draw();
+}
+```
+
 ---
 
 ### 3. Software Design Principles
