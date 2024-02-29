@@ -231,7 +231,7 @@ class UserProfile extends StatelessWidget {
   final User user;
   //... constructor and other methods
 
-  Future<UserData> fetchUserData(int id) async {
+  Future<UserData> fetchUserData() async {
     // Fetch logic here (asynchronous)
     // ...
   }
@@ -239,9 +239,43 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Fetching user data (Not a UI responsibility!)
-    final data = fetchUserData(user.id);
+    user = fetchUserData(user.id);
 
     return Text(data.name);
+  }
+}
+```
+
+Instead, separate responsibilities:
+
+```dart
+class UserController extend GetxController {
+
+Final user= Rxn<User>(null)
+
+@override
+  void onInit() {
+    fetchUserData();
+  }
+
+
+  // Handles data fetching logic
+  Future<UserData> fetchUserData(int id) async {
+    // Fetch logic here (asynchronous) from service
+    // ...
+	user.value = result;
+  }
+}
+
+class UserProfile extends StatelessWidget {
+
+  UserProfile({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
+    return Text(controller.user.value.name)
+    );
   }
 }
 ```
