@@ -257,6 +257,32 @@ void main() {
 }
 ```
 
+#### 1.5 Should not avoid Linter rules
+
+- Linting allows you to identify styling and error rules in your code and make them immediately apparent in your IDE. By ignoring linter rules, you risk sacrificing so many benefits, potentially leading to inconsistencies, lower quality code, and increased difficulty in maintaining and collaborating on the project. Therefore, it's generally advisable to adhere to linter rules to ensure code quality and consistency.
+- At the same time, using **ignore_for_file** in Flutter/Dart to suppress warnings is not advisable because:
+ * It reduces code clarity.
+ * Important warnings might be overlooked.
+ * It adds maintenance overhead.
+ * It can lead to lower code quality over time.
+
+```dart
+// DON'T : We should remove the command ignore_for_file || Ignoring for better code maintainability and quality
+// ignore_for_file: unused_import, avoid_print
+
+import 'dart:math'; // Ignoring unused_import warning
+
+void main() {
+  print("This is a message."); // Ignoring avoid_print warning
+  var result = calculateSquare(5);
+  print("Square of 5 is $result");
+}
+
+int calculateSquare(int num) {
+  return num * num;
+}
+```
+
 ---
 
 ### 2. Design Patterns
