@@ -20,7 +20,7 @@ In Flutter development, writing clean and maintainable code is essential for the
 - Use folders to group related files (e.g., screens, models, services ..etc).
 
 ```dart
-// Bad:
+// BAD:
 project_directory/
 │
 ├── lib/
@@ -36,7 +36,7 @@ project_directory/
 │
 └── main.dart
 
-// Good:
+// GOOD:
 project_directory/
 │
 ├── lib/
@@ -66,10 +66,10 @@ project_directory/
 - Avoid abbreviations and single-letter variable names.
 
 ```dart
-// Bad: Using non-descriptive variable names
+// BAD: Using non-descriptive variable names
 var a = 10;
 
-// Good: Using descriptive variable names
+// GOOD: Using descriptive variable names
 var numberOfItems = 10;
 ```
 
@@ -79,10 +79,10 @@ Class names should be nouns and written in UpperCamelCase.
 Use descriptive names that reflect the class's responsibility.
 
 ```dart
-// Bad: Non-descriptive class name
+// BAD: Non-descriptive class name
 class XYZ {}
 
-// Good: Descriptive class name
+// GOOD: Descriptive class name
 class UserRepository {}
 ```
 
@@ -91,13 +91,13 @@ class UserRepository {}
 Use searchable names instead of calling it inside the function
 
 ```dart
-//! BAD 
+// BAD:
 
 Future.delayed(const Duration(minutes: 30), () { 
   debugPrint('some logic here');
 }); 
 
-//* GOOD 
+// GOOD:
 
 const MINUTES_DURATION = 30;
 
@@ -109,14 +109,14 @@ Future.delayed(const Duration(minutes: MINUTES_DURATION), () {
 #### 1.2.4 Make sure folders and files are properly named.
 
 ```dart
-// Good: this is the proper way to name a file
-login_view.dart
-
-// Bad: these are all wrong
+// BAD: these are all wrong
 loginView.dart
 LoginView.dart
 loginview.dart
 Login_View.dart
+
+// GOOD: this is the proper way to name a file
+login_view.dart
 ```
 
 #### 1.3 API call
@@ -125,13 +125,13 @@ Use Future.wait to make concurrent API calls
 By using Future.wait, you can initiate multiple async tasks at the same time. Thereby reducing the overall execution time
 
 ```dart
+// BAD:
 Future callMultipleApis() async { 
   await getUserInfo(); 
   await getLocations();
 } 
 
-//* GOOD 
-
+// GOOD:
 Future callMultipleApis() async { 
   await Future.wait([
     getUserInfo(), 
@@ -145,8 +145,7 @@ Future callMultipleApis() async {
 Avoid duplicate code as much as possible. Duplications can complicate maintenance and updates, leading to inconsistencies. Instead, create a solid abstraction that can handle multiple scenarios with a single function or module. However, ensure that the abstraction is well-designed and follows the SOLID principles.
 
 ```dart
-//! BAD
-
+// BAD:
 Widget _buildAvatarStudent() {
   return Image.asset('assets/images/student.png');
 }
@@ -155,8 +154,7 @@ Widget _buildAvatarTeacher() {
   return Image.asset('assets/images/teacher.png');
 }
 
-//! GOOD
-
+// GOOD:
 Widget _buildAvatar(Person person) {
   String image = 'assets/images/placeholder.png';
   if (person is Student) {
