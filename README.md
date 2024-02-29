@@ -67,6 +67,19 @@ Future.delayed(const Duration(minutes: MINUTES_DURATION), () {
 }); 
 ```
 
+#### 1.2.4 Make sure folders and files are properly named.
+
+```dart
+// Good: this is the proper way to name a file
+login_view.dart
+
+// Bad: these are all wrong
+loginView.dart
+LoginView.dart
+loginview.dart
+Login_View.dart
+```
+
 #### 1.3 API call
 
 Use Future.wait to make concurrent API calls
