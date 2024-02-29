@@ -1,3 +1,9 @@
+# Content should include
+
+## - Beautiful and the art of coding
+## - Design Patterns
+## - Software Design Principles
+
 Resources
 Pattern: 
 -[https://medium.com/@flutterdynasty/design-patterns-in-flutter-25191278149c
