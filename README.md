@@ -251,7 +251,7 @@ Instead, separate responsibilities:
 ```dart
 class UserController extend GetxController {
 
-Final user= Rxn<User>(null)
+Final user= Rxn<User>(null);
 
 @override
   void onInit() {
