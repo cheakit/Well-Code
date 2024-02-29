@@ -362,14 +362,14 @@ class Bird {
 
 class Sparrow extends Bird {
   void move() {
-    // Sone Logic here
+    // Some Logic here
   }
   // The move method from Bird is reused, no new methods are added
 }
 
 class Penguin extends Bird {
   void move() {
-    // Sone Logic here
+    // Some Logic here
   }
   // The move method from Bird is reused, no new methods are added
 }
