@@ -21,7 +21,7 @@ In Flutter development, writing clean and maintainable code is essential for the
 
   * **Model**
 
-    - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងច្អឹង)
+    - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងឆ្អឹង)
     ```
     class Product{
       String name;
@@ -104,6 +104,8 @@ In Flutter development, writing clean and maintainable code is essential for the
     
     }
     ```
+
+* **Structure**
 
 ```dart
 // BAD:
