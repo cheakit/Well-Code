@@ -170,6 +170,8 @@ Widget _buildAvatar(Person person) {
 
 ### 2. Design Patterns
 
+#### 2.1 S — Single Responsibility Principle (SRP)
+
 ---
 
 ### 3. Software Design Principles
