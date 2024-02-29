@@ -339,6 +339,42 @@ The Liskov substitution principle simply implies that when an instance of a clas
 
 Imagine having a base Bird class and a derived Penguin class. If the Bird class has a fly method, it wouldn't fit the Penguin. LSP suggests that derived classes should perfectly fit the behaviors of their base classes. Here, we might need a rethinking of our class design.
 
+Instead of:
+
+```dart
+// DON'T
+class Bird {
+  void fly() {}
+}
+
+class Penguin extends Bird {} // Penguin can't fly!
+```
+
+Refactor to:
+
+```dart
+// DO
+class Bird {
+  void move() {
+    // Common implementation for all birds
+  }
+}
+
+class Sparrow extends Bird {
+  void move() {
+    // Sone Logic here
+  }
+  // The move method from Bird is reused, no new methods are added
+}
+
+class Penguin extends Bird {
+  void move() {
+    // Sone Logic here
+  }
+  // The move method from Bird is reused, no new methods are added
+}
+```
+
 ---
 
 ### 3. Software Design Principles
