@@ -241,3 +241,5 @@ Adhering to clean code principles in Flutter development leads to a more maintai
 ](url)
 
 -[https://blog.stackademic.com/solid-principles-in-flutter-crafting-robust-apps-0e1d1bcefeca](url)
+
+-[https://www.freecodecamp.org/news/solid-principles-single-responsibility-principle-explained/](url)
