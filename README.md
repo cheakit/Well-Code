@@ -329,7 +329,7 @@ class ShapePainter {
 }
 ```
 
-#### 2.2 L — Liskov Substitution Principle (LSP)
+#### 2.3 L — Liskov Substitution Principle (LSP)
 
 According to Barbara Liskov and Jeannette Wing, the Liskov substitution principle states that:
 
@@ -374,6 +374,8 @@ class Penguin extends Bird {
   // The move method from Bird is reused, no new methods are added
 }
 ```
+
+#### 2.4 I — Interface Segregation Principle (ISP)
 
 ---
 
