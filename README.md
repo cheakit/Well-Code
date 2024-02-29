@@ -22,7 +22,7 @@ In Flutter development, writing clean and maintainable code is essential for the
   * **Model**
 
     - Models are just classes which help us to determine the structure of the data (skeleton/គ្រោងឆ្អឹង)
-    ```
+    ```dart
     class Product{
       String name;
       double price;
@@ -40,7 +40,7 @@ In Flutter development, writing clean and maintainable code is essential for the
 
     - The controller manages the screens' state and business logic. It notifies the Builder when the state changes.
 
-    ```
+    ```dart
     // ORIGINAL:
     class ProfileScreen extends StatefulWidget {
       @override
@@ -95,7 +95,7 @@ In Flutter development, writing clean and maintainable code is essential for the
   * **Service**
 
     - Services contains files that makes Apis calls or interact with external network such as HTTP or background location services.Files in this folder are strictly concerned with making requests
-    ```
+    ```dart
     class UserService{
     
       User getProfile() async {
@@ -240,24 +240,20 @@ Future callMultipleApis() async {
 Avoid duplicate code as much as possible. Duplications can complicate maintenance and updates, leading to inconsistencies. Instead, create a solid abstraction that can handle multiple scenarios with a single function or module. However, ensure that the abstraction is well-designed and follows the SOLID principles.
 
 ```dart
-// BAD:
-Widget _buildAvatarStudent() {
-  return Image.asset('assets/images/student.png');
+// BAD: Avoid repeating the same code.
+void main() {
+  print("Hello, Alice!");
+  print("Hello, Bob!");
 }
 
-Widget _buildAvatarTeacher() {
-  return Image.asset('assets/images/teacher.png');
+// GOOD: Create a function to handle repetitive tasks.
+String greet(String name) {
+  return "Hello, $name!";
 }
 
-// GOOD:
-Widget _buildAvatar(Person person) {
-  String image = 'assets/images/placeholder.png';
-  if (person is Student) {
-    image = 'assets/images/student.png';
-  } else if (person is Teacher) {
-    image = 'assets/iamges/teacher.png';
-  }
-  return Image.asset(image);
+void main() {
+  print(greet("Alice"));
+  print(greet("Bob"));
 }
 ```
 
