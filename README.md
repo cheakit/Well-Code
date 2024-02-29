@@ -1,8 +1,8 @@
 # Content should include
 
-* 1. Beautiful and the art of coding
-* 2. Design Patterns
-* 3. Software Design Principles
+* Beautiful and the art of coding
+* Design Patterns
+* Software Design Principles
 
 ---
 
