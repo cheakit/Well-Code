@@ -203,7 +203,7 @@ Imagine a new developer joining a team with this sort of logic with a codebase o
 Now let's fix this
 
 ```dart
-// Avoid:
+// Good:
 class StudentRegister {
   void registerStudent() {
     // some logic
