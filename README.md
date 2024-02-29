@@ -581,6 +581,8 @@ And,
 
 	Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
 
+Suppose your widget directly initializes and interacts with a database. That’s a rigid design. If you switch databases, you’ll need significant changes. Instead, depend on abstract classes or interfaces. Use dependency injection to provide the concrete implementations, making your system more modular and testable.
+
  *Example*
 
  Rather than:
