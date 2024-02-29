@@ -289,6 +289,8 @@ class MyCustomButton extends StatelessWidget {
 
 ### 2. Design Patterns (S.O.L.I.D Principle)
 
+![My Image](image/SOLID.jpg)
+
 #### 2.1 S — Single Responsibility Principle (SRP)
 
 The idea behind the SRP is that every class, module, or function in a program should have one responsibility/purpose in a program. As a commonly used definition, "every class should have only one reason to change".
@@ -296,7 +298,7 @@ The idea behind the SRP is that every class, module, or function in a program sh
 Consider the example below:
 
 ```dart
-// DON'T:
+// DO:
 class Student {
   void registerStudent() {
     // some logic
@@ -400,6 +402,265 @@ class UserProfile extends StatelessWidget {
 ```
 
 #### 2.2 O — Open/Closed Principle (OCP)
+
+The open-closed principle states that software entities should be open for extension, but closed for modification.
+This implies that such entities – classes, functions, and so on – should be created in a way that their core functionalities can be extended to other entities without altering the initial entity's source code.
+
+What if you now need to draw squares? Instead of altering the widget, design it in a way that allows adding new shapes without changing the existing code. Maybe introduce a base Shape class and extend it for various forms.
+
+Instead of:
+```dart
+// DON'T
+class ShapePainter {
+  final String shapeType;
+
+  draw() {
+    if (shapeType == 'circle') {
+      // Draw circle
+    } else if (shapeType == 'square') {
+      // Draw square
+    }
+  }
+}
+```
+
+Opt for:
+
+```dart
+// DO
+abstract class Shape {
+  void draw();
+}
+
+class Circle implements Shape {
+  void draw() {
+    // Draw circle
+  }
+}
+
+class Square implements Shape {
+  void draw() {
+    // Draw square
+  }
+}
+
+class ShapePainter {
+  final Shape shape;
+  void draw() => shape.draw();
+}
+```
+
+#### 2.3 L — Liskov Substitution Principle (LSP)
+
+According to Barbara Liskov and Jeannette Wing, the Liskov substitution principle states that:
+
+Don't worry if you find that confusing, it will all make sense soon. Let's simplify this principle below:
+
+The Liskov substitution principle simply implies that when an instance of a class is passed/extended to another class, the inheriting class should have a use case for all the properties and behavior of the inherited class.
+
+Imagine having a base Bird class and a derived Penguin class. If the Bird class has a fly method, it wouldn't fit the Penguin. LSP suggests that derived classes should perfectly fit the behaviors of their base classes. Here, we might need a rethinking of our class design.
+
+Instead of:
+
+```dart
+// DON'T
+class Bird {
+  void fly() {}
+}
+
+class Penguin extends Bird {} // Penguin can't fly!
+```
+
+Refactor to:
+
+```dart
+// DO
+class Bird {
+  void move() {
+    // Common implementation for all birds
+  }
+}
+
+class Sparrow extends Bird {
+  void move() {
+    // Some Logic here
+  }
+  // The move method from Bird is reused, no new methods are added
+}
+
+class Penguin extends Bird {
+  void move() {
+    // Some Logic here
+  }
+  // The move method from Bird is reused, no new methods are added
+}
+```
+
+#### 2.4 I — Interface Segregation Principle (ISP)
+
+The interface segregation principle states that the interface of a program should be split in a way that the user/client would only have access to the necessary methods related to their needs.
+
+To understand this better, we'll first look at an example that violates the ISP:
+
+```dart
+// DON'T
+abstract class Teacher {
+  void english();
+
+  void biology();
+
+  void chemistry();
+  
+  void mathematics();
+}
+
+class Jane implements Teacher {
+  @override
+  void english() {
+    print("Jane is teaching the students English language.");
+  }
+
+  @override
+  void biology() {
+    // Implement the biology method if needed
+  }
+
+  @override
+  void chemistry() {
+    // Implement the chemistry method if needed
+  }
+
+  @override
+  void mathematics() {
+    // Implement the mathematics method if needed
+  }
+}
+```
+
+From the code above, you can tell that Jane is an English teacher who has no business with the other subjects. But these other methods are extended by default with the Teacher interface.
+
+Do not confuse the Liskov substitution principle and the interface segregation principle.The Liskov Substitution Principle emphasizes that a subclass should inherit from a base class only if it genuinely needs the base class's methods.
+
+In contrast, the Interface Segregation Principle advises against creating interfaces with excessive methods, as some may be irrelevant for specific users when extended.
+
+Now let's fix the code in the last example and break it down.
+
+```dart
+// DO
+abstract class EnglishTeacher {
+  void english();
+}
+
+abstract class BiologyTeacher {
+  void biology();
+}
+
+abstract class ChemistryTeacher {
+  void chemistry();
+}
+
+// ...
+
+class Jane implements EnglishTeacher {
+  @override
+  void english() {
+    print("Jane is teaching the students English language.");
+  }
+}
+```
+
+Now the Teacher class now has only one method. You can extend from the teacher class without getting other unecessary **methods**.
+
+#### 2.5 D — Dependency Inversion Principle (DIP)
+
+The dependency inversion principle states:
+
+	High-level modules should not import anything from low-level modules. Both should depend on abstractions
+
+And,
+
+	Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.
+
+Suppose your widget directly initializes and interacts with a database. That’s a rigid design. If you switch databases, you’ll need significant changes. Instead, depend on abstract classes or interfaces. Use dependency injection to provide the concrete implementations, making your system more modular and testable.
+
+ *Example*
+
+ Rather than:
+
+ ```dart
+class LightSwitch {
+  final Bulb bulb;
+
+  void operate() {
+    bulb.toggle();
+  }
+}
+```
+
+Go for:
+
+```dart
+abstract class Switchable {
+  void toggle();
+}
+
+class Bulb implements Switchable {
+  void toggle() {
+    // Toggle bulb
+  }
+}
+
+class LightSwitch {
+  final Switchable device;
+
+  void operate() {
+    device.toggle();
+  }
+}
+```
+
+### Why SOLID in Flutter?
+
+#### Robust Architecture:
+Structuring your Flutter codebase around SOLID principles, which include Single Responsibility Principle (SRP), Open/Closed Principle (OCP), Liskov Substitution Principle (LSP), Interface Segregation Principle (ISP), and Dependency Inversion Principle (DIP), leads to a more robust architecture.
+
+- **Single Responsibility Principle (SRP):**
+  - Each class or module has a single responsibility, making it easier to understand and maintain.
+  
+- **Open/Closed Principle (OCP):**
+  - Code is designed to be open for extension but closed for modification, promoting scalability and reducing the risk of introducing bugs.
+
+- **Liskov Substitution Principle (LSP):**
+  - Subtypes can be substituted for their base types without affecting the correctness of the program, ensuring proper inheritance.
+
+- **Interface Segregation Principle (ISP):**
+  - Interfaces are kept concise and relevant, preventing unnecessary dependencies and improving code clarity.
+
+- **Dependency Inversion Principle (DIP):**
+  - High-level modules are not dependent on low-level modules; both depend on abstractions. This inversion of control enhances flexibility and maintainability.
+
+#### Flexibility:
+Adhering to SOLID principles brings increased flexibility to your Flutter project.
+
+- **Easier Changes:**
+  - Modifications to the codebase become less daunting due to the modular and well-organized structure.
+  
+- **Smoother Feature Additions:**
+  - Adding new features is a smoother process, as the codebase is designed to accommodate changes without disrupting existing functionality.
+
+#### Testability:
+SOLID principles significantly enhance the testability of your Flutter application.
+
+- **Decoupled Components:**
+  - Components are decoupled, making unit testing straightforward and enabling the isolation of specific functionalities for testing.
+  
+- **Improved Maintainability:**
+  - Unit tests become more manageable, leading to better code maintenance and reducing the likelihood of introducing regressions.
+
+In summary, adopting SOLID principles in Flutter not only results in a more maintainable and scalable codebase but also provides flexibility for future changes and greatly facilitates the testing process.
+
+### Conclusion
+While the SOLID principles might sound theoretical initially, applying them can lead to tangible benefits in your Flutter projects. As you craft more apps, these principles can be your trusty companions, guiding you towards cleaner, more efficient, and joyous coding adventures!
 
 ---
 
