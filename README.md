@@ -174,6 +174,25 @@ Widget _buildAvatar(Person person) {
 
 The idea behind the SRP is that every class, module, or function in a program should have one responsibility/purpose in a program. As a commonly used definition, "every class should have only one reason to change".
 
+Consider the example below:
+
+```dart
+// BAD:
+class Student {
+  void registerStudent() {
+    // some logic
+  }
+
+  void calculateStudentResults() {
+    // some logic
+  }
+
+  void sendEmail() {
+    // some logic
+  }
+}
+```
+
 ---
 
 ### 3. Software Design Principles
