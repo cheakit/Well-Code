@@ -168,7 +168,7 @@ Widget _buildAvatar(Person person) {
 
 ---
 
-### 2. Design Patterns
+### 2. Design Patterns (S.O.L.I.D Principle)
 
 #### 2.1 S — Single Responsibility Principle (SRP)
 
@@ -279,6 +279,8 @@ class UserProfile extends StatelessWidget {
   }
 }
 ```
+
+#### 2.2 O — Open/Closed Principle (OCP)
 
 ---
 
