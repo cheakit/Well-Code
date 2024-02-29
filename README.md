@@ -162,10 +162,10 @@ project_directory/
 - Avoid abbreviations and single-letter variable names.
 
 ```dart
-// BAD: Using non-descriptive variable names
+// DON'T: Using non-descriptive variable names
 var a = 10;
 
-// GOOD: Using descriptive variable names
+// DO: Using descriptive variable names
 var numberOfItems = 10;
 ```
 
@@ -175,10 +175,10 @@ Class names should be nouns and written in UpperCamelCase.
 Use descriptive names that reflect the class's responsibility.
 
 ```dart
-// BAD: Non-descriptive class name
+// DON'T: Non-descriptive class name
 class XYZ {}
 
-// GOOD: Descriptive class name
+// DO: Descriptive class name
 class UserRepository {}
 ```
 
@@ -187,13 +187,13 @@ class UserRepository {}
 Use searchable names instead of calling it inside the function
 
 ```dart
-// BAD:
+// DON'T:
 
 Future.delayed(const Duration(minutes: 30), () { 
   debugPrint('some logic here');
 }); 
 
-// GOOD:
+// DO:
 const MINUTES_DURATION = 30;
 
 Future.delayed(const Duration(minutes: MINUTES_DURATION), () { 
@@ -204,13 +204,13 @@ Future.delayed(const Duration(minutes: MINUTES_DURATION), () {
 #### 1.2.4 Make sure folders and files are properly named.
 
 ```dart
-// BAD: these are all wrong
+// DON'T: these are all wrong
 loginView.dart
 LoginView.dart
 loginview.dart
 Login_View.dart
 
-// GOOD: this is the proper way to name a file
+// DO: this is the proper way to name a file
 login_view.dart
 ```
 
@@ -220,13 +220,13 @@ Use Future.wait to make concurrent API calls
 By using Future.wait, you can initiate multiple async tasks at the same time. Thereby reducing the overall execution time
 
 ```dart
-// BAD:
+// DON'T:
 Future callMultipleApis() async { 
   await getUserInfo(); 
   await getLocations();
 } 
 
-// GOOD:
+// DO:
 Future callMultipleApis() async { 
   await Future.wait([
     getUserInfo(), 
@@ -240,13 +240,13 @@ Future callMultipleApis() async {
 Avoid duplicate code as much as possible. Duplications can complicate maintenance and updates, leading to inconsistencies. Instead, create a solid abstraction that can handle multiple scenarios with a single function or module. However, ensure that the abstraction is well-designed and follows the SOLID principles.
 
 ```dart
-// BAD: Avoid repeating the same code.
+// DON'T: Avoid repeating the same code.
 void main() {
   print("Hello, Alice!");
   print("Hello, Bob!");
 }
 
-// GOOD: Create a function to handle repetitive tasks.
+// DO: Create a function to handle repetitive tasks.
 String greet(String name) {
   return "Hello, $name!";
 }
