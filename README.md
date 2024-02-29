@@ -377,6 +377,73 @@ class Penguin extends Bird {
 
 #### 2.4 I — Interface Segregation Principle (ISP)
 
+The interface segregation principle states that the interface of a program should be split in a way that the user/client would only have access to the necessary methods related to their needs.
+
+To understand this better, we'll first look at an example that violates the ISP:
+
+```dart
+// DON'T
+abstract class Teacher {
+  void english();
+
+  void biology();
+
+  void chemistry();
+  
+  void mathematics();
+}
+
+class Jane implements Teacher {
+  @override
+  void english() {
+    print("Jane is teaching the students English language.");
+  }
+
+  @override
+  void biology() {
+    // Implement the biology method if needed
+  }
+
+  @override
+  void chemistry() {
+    // Implement the chemistry method if needed
+  }
+
+  @override
+  void mathematics() {
+    // Implement the mathematics method if needed
+  }
+}
+```
+
+From the code above, you can tell that Jane is an English teacher who has no business with the other subjects. But these other methods are extended by default with the Teacher interface.
+
+Break it down:
+
+```dart
+// DON'T
+abstract class EnglishTeacher {
+  void english();
+}
+
+abstract class BiologyTeacher {
+  void biology();
+}
+
+abstract class ChemistryTeacher {
+  void chemistry();
+}
+
+// ...
+
+class Jane implements EnglishTeacher {
+  @override
+  void english() {
+    print("Jane is teaching the students English language.");
+  }
+}
+```
+
 ---
 
 ### 3. Software Design Principles
