@@ -569,7 +569,11 @@ class Jane implements EnglishTeacher {
 }
 ```
 
-Now the Teacher class now has only one method. You can extend from the teacher class with getting other unecessary **methods**.
+Now the Teacher class now has only one method. You can extend from the teacher class without getting other unecessary **methods**.
+
+#### 2.2 D — Dependency Inversion Principle (DIP)
+
+*Motto: Depend on abstractions, not concretions!*
 
 ---
 
