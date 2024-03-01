@@ -330,7 +330,7 @@ The idea behind the SRP is that every class, module, or function in a program sh
 Consider the example below:
 
 ```dart
-// DO:
+// DON'T:
 class Student {
   void registerStudent() {
     // some logic
